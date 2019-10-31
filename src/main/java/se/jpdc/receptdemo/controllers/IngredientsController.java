@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import se.jpdc.receptdemo.model.Ingredient;
 import se.jpdc.receptdemo.model.RecipeIngredient;
 import se.jpdc.receptdemo.service.IngredientService;
+import se.jpdc.receptdemo.service.RecipeIngredientService;
 
 @RestController
 public class IngredientsController {
@@ -14,8 +16,9 @@ public class IngredientsController {
     IngredientService service;
 
     @PostMapping("/addingredient")
-    public void addRecipe(@RequestBody RecipeIngredient ingredient) {
-        service.addIngredient(ingredient);
+    public void addRecipe(@RequestBody Ingredient ingredient) {
+
+        service.addNewIngredient(ingredient);
     }
 
 }

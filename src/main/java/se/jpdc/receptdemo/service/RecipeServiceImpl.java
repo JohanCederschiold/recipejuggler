@@ -14,7 +14,7 @@ public class RecipeServiceImpl implements RecipeService {
     RecipeRepository repo;
 
     @Autowired
-    IngredientService ingredientService;
+    RecipeIngredientService recipeIngredientService;
 
 
 
@@ -28,7 +28,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         Recipe recipe = (Recipe) repo.getOne(recipeId);
         recipeIngredient.setRecipe(recipe);
-        ingredientService.addIngredient(recipeIngredient);
+        recipeIngredientService.addIngredient(recipeIngredient);
 
     }
 
