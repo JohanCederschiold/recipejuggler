@@ -1,7 +1,7 @@
 package se.jpdc.receptdemo.database;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import se.jpdc.receptdemo.model.Ingredients;
+import se.jpdc.receptdemo.model.RecipeIngredient;
 
-public interface IngredientsRepo extends JpaRepository<Ingredients, Long> {
+public interface IngredientsRepo extends JpaRepository<RecipeIngredient, Long> {
 }

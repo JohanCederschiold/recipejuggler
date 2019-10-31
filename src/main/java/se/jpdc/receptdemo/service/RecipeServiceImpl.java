@@ -3,7 +3,7 @@ package se.jpdc.receptdemo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.jpdc.receptdemo.database.RecipeRepository;
-import se.jpdc.receptdemo.model.Ingredients;
+import se.jpdc.receptdemo.model.RecipeIngredient;
 import se.jpdc.receptdemo.model.Recipe;
 import se.jpdc.receptdemo.model.RecipeDTO;
 
@@ -24,12 +24,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void addIngredientToRecipe(long recipeId, Ingredients ingredients) {
+    public void addIngredientToRecipe(long recipeId, RecipeIngredient recipeIngredient) {
 
-        ingredientService.addIngredient(ingredients);
-        Recipe recipe = repo.getOne(recipeId);
-        recipe.getIngredients().add(ingredients);
-        repo.save(recipe);
+        Recipe recipe = (Recipe) repo.getOne(recipeId);
+        recipeIngredient.setRecipe(recipe);
+        ingredientService.addIngredient(recipeIngredient);
+
     }
 
 

@@ -20,8 +20,5 @@ public class Recipe {
     private int noPortions;
     private String instructions;
 
-    @OneToMany
-    private Set<Ingredients> ingredients;
-
 
 }

@@ -1,10 +1,9 @@
 package se.jpdc.receptdemo.service;
 
-import se.jpdc.receptdemo.model.IngredientDTO;
-import se.jpdc.receptdemo.model.Ingredients;
+import se.jpdc.receptdemo.model.RecipeIngredient;
 
 public interface IngredientService {
 
-    public void addIngredient(Ingredients ingredient);
+    public void addIngredient(RecipeIngredient ingredient);
 
 }
