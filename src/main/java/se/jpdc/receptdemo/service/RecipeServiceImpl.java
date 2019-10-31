@@ -13,6 +13,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     RecipeRepository repo;
 
+    @Autowired
+    IngredientService ingredientService;
+
 
 
     @Override
@@ -23,9 +26,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void addIngredientToRecipe(long recipeId, Ingredients ingredients) {
 
+        ingredientService.addIngredient(ingredients);
         Recipe recipe = repo.getOne(recipeId);
-
-
+        recipe.getIngredients().add(ingredients);
+        repo.save(recipe);
     }
 
 

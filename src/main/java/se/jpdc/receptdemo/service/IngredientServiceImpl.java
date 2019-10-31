@@ -13,8 +13,8 @@ public class IngredientServiceImpl implements IngredientService {
     IngredientsRepo repo;
 
     @Override
-    public void addIngredient(IngredientDTO ingredientDTO) {
-        repo.save(convertFromDTO(ingredientDTO));
+    public void addIngredient(Ingredients ingredient) {
+        repo.save(ingredient);
     }
 
 
