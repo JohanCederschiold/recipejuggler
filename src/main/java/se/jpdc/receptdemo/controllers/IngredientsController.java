@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import se.jpdc.receptdemo.model.Ingredient;
+import se.jpdc.receptdemo.model.IngredientDTO;
 import se.jpdc.receptdemo.model.RecipeIngredient;
 import se.jpdc.receptdemo.service.IngredientService;
 import se.jpdc.receptdemo.service.RecipeIngredientService;
@@ -16,9 +17,8 @@ public class IngredientsController {
     IngredientService service;
 
     @PostMapping("/addingredient")
-    public void addRecipe(@RequestBody Ingredient ingredient) {
-
-        service.addNewIngredient(ingredient);
+    public IngredientDTO addRecipe(@RequestBody Ingredient ingredient) {
+        return service.addNewIngredient(ingredient);
     }
 
 }

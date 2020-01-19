@@ -3,10 +3,9 @@ package se.jpdc.receptdemo.model;
 import lombok.Data;
 
 @Data
-public class RecipeDTO {
+public class IngredientDTO {
 
     private Long id;
-    private String title;
-    private String owner;
-
+    private String name;
+    private MeasureUnits units;
 }

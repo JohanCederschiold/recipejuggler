@@ -12,9 +12,10 @@ public class RecipeIngredient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Recipe recipe;
 
-    private String name; //Todo: This should be change to it's own entity to alleviate searching for ingredients.
+    @OneToOne
+    private Ingredient ingredient;
     private double amount;
 }
