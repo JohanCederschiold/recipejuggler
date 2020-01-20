@@ -46,12 +46,13 @@ public class RecipeController {
         return recipeService.findRecipiesByOwner(name);
     }
 
-            /*
-    @PostMapping("/addtorecepy/{id}")
-    public void addToRecipy(@RequestBody RecipeIngredient ingredient, @PathVariable Long id) {
-        recipeService.addIngredientToRecipe(id, ingredient );
+    @GetMapping("/all")
+    public List<RecipeDTO> getAllRecipes() {
+        return recipeService.getAllRecipes();
     }
 
- */
-
+    @GetMapping("/find/id/{id}")
+    public RecipeDTO findRecipeById(@PathVariable Long id) {
+        return recipeService.findRecipyById(id);
+    }
 }

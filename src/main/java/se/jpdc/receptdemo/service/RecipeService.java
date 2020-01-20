@@ -14,6 +14,7 @@ public interface RecipeService {
     public RecipeDTO findRecipyById(Long id);
     public List<RecipeDTO> findRecipeByName(String name);
     public List<RecipeDTO> findRecipiesByOwner(String ownerName);
+    public List<RecipeDTO> getAllRecipes();
 
 
 }

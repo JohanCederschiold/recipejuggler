@@ -7,6 +7,6 @@ import se.jpdc.receptdemo.model.Ingredient;
 @Repository
 public interface IngredientsRepository extends JpaRepository<Ingredient, Long> {
 
-    Ingredient findByName(String ingredientName);
+    Ingredient findByNameIgnoreCase(String ingredientName);
 
 }

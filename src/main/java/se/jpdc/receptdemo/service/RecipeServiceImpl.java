@@ -72,6 +72,17 @@ public class RecipeServiceImpl extends RecipeEntityService implements RecipeServ
         return recipeDTOS;
     }
 
+    @Override
+    public List<RecipeDTO> getAllRecipes() {
+        List<Recipe> recipes = repo.findAll();
+        List<RecipeDTO> recipeDtos = new ArrayList<>();
+
+        for (Recipe recipe : recipes) {
+            recipeDtos.add(convertToDto(recipe));
+        }
+        return recipeDtos;
+    }
+
     public Recipe convertFromDTO (RecipeDTO recipeDTO) {
         Recipe recipeToSave = new Recipe();
         recipeToSave.setOwner(recipeDTO.getOwner());
