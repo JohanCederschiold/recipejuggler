@@ -95,6 +95,9 @@ public class RecipeServiceImpl extends RecipeEntityService implements RecipeServ
         dto.setId(recipe.getId());
         dto.setOwner(recipe.getOwner());
         dto.setTitle(recipe.getTitle());
+        dto.setInstructions(recipe.getInstructions());
+        dto.setNoPortions(recipe.getNoPortions());
+        dto.setPreparationTimeMinutes(recipe.getPreparationTimeMinutes());
         return dto;
     }
 
