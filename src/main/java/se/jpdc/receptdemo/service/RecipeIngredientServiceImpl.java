@@ -18,7 +18,13 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
     RecipeEntityService recipeEntityService;
 
     @Autowired
+    RecipeService recipeService;
+
+    @Autowired
     IngredientEntityService ingredientEntityService;
+
+    @Autowired
+    StepService stepService;
 
 
     @Override
@@ -59,6 +65,33 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
         RecipeIngredient updatedRecipeIngredient = repo.save(originalRecipeIngredient);
         return convertToDTO(updatedRecipeIngredient);
 
+    }
+
+    @Override
+    public CompleteRecipeDTO getCompleteRecipe(Long id) {
+
+        System.out.println(id);
+
+        RecipeDTO recipe = recipeService.findRecipyById(id);
+        System.out.println(recipe != null);
+        List<RecipeIngredientDTO> ingredients = getIngredientsForRecipe(id);
+        System.out.println(ingredients.size());
+        List<IngredientAmountDTO> ingredientAmounts = new ArrayList<>();
+
+        for(RecipeIngredientDTO dto : ingredients) {
+            Ingredient ingredientNameAndUnit = ingredientEntityService.getIngredientEntity(dto.getIngredientId());
+
+            IngredientAmountDTO ingredientAmountDTO = new IngredientAmountDTO(  ingredientNameAndUnit.getName(),
+                                                                                ingredientNameAndUnit.getUnit(),
+                                                                                dto.getAmount());
+            ingredientAmounts.add(ingredientAmountDTO);
+        }
+
+        List<StepDTO> steps = stepService.getStepsToRecipeByRecipeId(id);
+
+
+        return new CompleteRecipeDTO(id, recipe.getTitle(),recipe.getOwner(), recipe.getPreparationTimeMinutes(),
+                    recipe.getNoPortions(), recipe.getInstructions(), ingredientAmounts, steps);
     }
 
     public List<RecipeIngredientDTO> getIngredientsForRecipe(Long id) {

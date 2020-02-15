@@ -1,5 +1,6 @@
 package se.jpdc.receptdemo.service;
 
+import se.jpdc.receptdemo.model.CompleteRecipeDTO;
 import se.jpdc.receptdemo.model.RecipeIngredient;
 import se.jpdc.receptdemo.model.RecipeIngredientDTO;
 import se.jpdc.receptdemo.model.RecipeIngredientWrapper;
@@ -12,5 +13,6 @@ public interface RecipeIngredientService {
     public List<RecipeIngredientDTO> getIngredientsForRecipe(Long id);
     public void deleteRecipeIngredient(Long id);
     public RecipeIngredientDTO updateRecipeIngredient(RecipeIngredientDTO recipeIngredientDTO);
+    public CompleteRecipeDTO getCompleteRecipe(Long id);
 
 }

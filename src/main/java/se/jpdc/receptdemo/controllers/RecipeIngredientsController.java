@@ -3,6 +3,7 @@ package se.jpdc.receptdemo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import se.jpdc.receptdemo.model.CompleteRecipeDTO;
 import se.jpdc.receptdemo.model.RecipeIngredientDTO;
 import se.jpdc.receptdemo.model.RecipeIngredientWrapper;
 import se.jpdc.receptdemo.service.RecipeIngredientService;
@@ -39,5 +40,9 @@ public class RecipeIngredientsController {
         return recipeIngredientService.updateRecipeIngredient(recipeIngredientDTO);
     }
 
+    @GetMapping("/get/complete/id/{id}")
+    public CompleteRecipeDTO getCompleteRecipe(@PathVariable Long id) {
+        return recipeIngredientService.getCompleteRecipe(id);
+    }
 
 }
