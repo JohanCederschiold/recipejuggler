@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class RecipeIngredientDTO {
+@AllArgsConstructor
+public class RecipeIngredientNameDTO {
 
-    private Long id;
     private Long recipeId;
-    private Long ingredientId;
+    private String ingredientName;
+    private MeasureUnits units;
     private double amount;
-
-
 
 }

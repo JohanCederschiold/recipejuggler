@@ -94,6 +94,23 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
                     recipe.getNoPortions(), recipe.getInstructions(), ingredientAmounts, steps);
     }
 
+    @Override
+    public List<RecipeIngredientNameDTO> getIngredientsForRecipeIds(List<Long> ids) {
+        List<RecipeIngredientNameDTO> dto = new ArrayList<>();
+        for(Long id : ids) {
+            RecipeDTO recipe = recipeService.findRecipyById(id);
+            List<RecipeIngredientDTO> recipeIngredientDTOS = getIngredientsForRecipe(id);
+            for (RecipeIngredientDTO recipeIngredientDTO : recipeIngredientDTOS) {
+                Ingredient ingredient = ingredientEntityService.getIngredientEntity(recipeIngredientDTO.getIngredientId());
+                dto.add(new RecipeIngredientNameDTO(id,
+                                                    ingredient.getName(),
+                                                    ingredient.getUnit(),
+                                                    recipeIngredientDTO.getAmount()/ recipe.getNoPortions()));
+            }
+        }
+        return dto;
+    }
+
     public List<RecipeIngredientDTO> getIngredientsForRecipe(Long id) {
         List<RecipeIngredientDTO> dtos = new ArrayList<>();
         List<RecipeIngredient> results = repo.findRecipeIngredientsByRecipe_Id(id);

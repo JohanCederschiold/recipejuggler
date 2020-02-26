@@ -3,9 +3,7 @@ package se.jpdc.receptdemo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import se.jpdc.receptdemo.model.CompleteRecipeDTO;
-import se.jpdc.receptdemo.model.RecipeIngredientDTO;
-import se.jpdc.receptdemo.model.RecipeIngredientWrapper;
+import se.jpdc.receptdemo.model.*;
 import se.jpdc.receptdemo.service.RecipeIngredientService;
 
 import java.util.List;
@@ -43,6 +41,12 @@ public class RecipeIngredientsController {
     @GetMapping("/get/complete/id/{id}")
     public CompleteRecipeDTO getCompleteRecipe(@PathVariable Long id) {
         return recipeIngredientService.getCompleteRecipe(id);
+    }
+
+    @PostMapping("/post/listRecipeIngredients")
+    public List<RecipeIngredientNameDTO> getRecipeIngredientsForRecipeIdsList(@RequestBody RecipeIdWrapper recipeIds){
+        List<Long> list = recipeIds.getRecipeIds();
+        return recipeIngredientService.getIngredientsForRecipeIds(list);
     }
 
 }
