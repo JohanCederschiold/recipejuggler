@@ -55,4 +55,14 @@ public class RecipeController {
     public RecipeDTO findRecipeById(@PathVariable Long id) {
         return recipeService.findRecipyById(id);
     }
+
+    @GetMapping("/find/searchstring/{searchString}")
+    public List<RecipeDTO> findRecipesByNameContaining (@PathVariable String searchString) {
+        return recipeService.searchRecipesByTitleContaining(searchString);
+    }
+
+    @GetMapping("find/ingredient/{ingredient}")
+    public List<RecipeDTO> findRecipeByIngredient(@PathVariable String ingredient) {
+        return recipeService.searchRecipesByIngredients(ingredient);
+    }
 }

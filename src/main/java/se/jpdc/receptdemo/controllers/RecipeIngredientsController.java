@@ -48,5 +48,4 @@ public class RecipeIngredientsController {
         List<Long> list = recipeIds.getRecipeIds();
         return recipeIngredientService.getIngredientsForRecipeIds(list);
     }
-
 }

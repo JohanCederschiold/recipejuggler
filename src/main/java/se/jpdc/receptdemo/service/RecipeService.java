@@ -15,6 +15,8 @@ public interface RecipeService {
     public List<RecipeDTO> findRecipeByName(String name);
     public List<RecipeDTO> findRecipiesByOwner(String ownerName);
     public List<RecipeDTO> getAllRecipes();
+    public List<RecipeDTO> searchRecipesByTitleContaining(String searchString);
+    public List<RecipeDTO> searchRecipesByIngredients(String searchString);
 
 
 }

@@ -3,9 +3,7 @@ package se.jpdc.receptdemo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.jpdc.receptdemo.database.RecipeRepository;
-import se.jpdc.receptdemo.model.RecipeIngredient;
-import se.jpdc.receptdemo.model.Recipe;
-import se.jpdc.receptdemo.model.RecipeDTO;
+import se.jpdc.receptdemo.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +13,9 @@ public class RecipeServiceImpl extends RecipeEntityService implements RecipeServ
 
     @Autowired
     RecipeRepository repo;
+
+    @Autowired
+    RecipeIngredientService recipeIngredientService;
 
 
     @Override
@@ -81,6 +82,28 @@ public class RecipeServiceImpl extends RecipeEntityService implements RecipeServ
             recipeDtos.add(convertToDto(recipe));
         }
         return recipeDtos;
+    }
+
+    @Override
+    public List<RecipeDTO> searchRecipesByTitleContaining(String searchString) {
+        List<Recipe> recipes = repo.findRecipeByTitleContainingIgnoreCase(searchString);
+        List<RecipeDTO> recipeDtos = new ArrayList<>();
+        for(Recipe recipe : recipes) {
+            recipeDtos.add(convertToDto(recipe));
+        }
+        return recipeDtos;
+    }
+
+    @Override
+    public List<RecipeDTO> searchRecipesByIngredients(String searchString) {
+        List<RecipeIngredientDTO> recipeIngredients = recipeIngredientService.findRecipeIngredientsByIngredient(searchString);
+        List<RecipeDTO> recipeDTOS = new ArrayList<>();
+
+        for(RecipeIngredientDTO recipeIngredientDTO : recipeIngredients) {
+            Recipe recipe = repo.getOne(recipeIngredientDTO.getRecipeId());
+            recipeDTOS.add(convertToDto(recipe));
+        }
+        return recipeDTOS;
     }
 
     public Recipe convertFromDTO (RecipeDTO recipeDTO) {

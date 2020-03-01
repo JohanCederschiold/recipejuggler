@@ -12,5 +12,6 @@ public interface RecipeIngredientService {
     public RecipeIngredientDTO updateRecipeIngredient(RecipeIngredientDTO recipeIngredientDTO);
     public CompleteRecipeDTO getCompleteRecipe(Long id);
     public List<RecipeIngredientNameDTO> getIngredientsForRecipeIds(List<Long> ids);
+    public List<RecipeIngredientDTO> findRecipeIngredientsByIngredient (String ingredient);
 
 }

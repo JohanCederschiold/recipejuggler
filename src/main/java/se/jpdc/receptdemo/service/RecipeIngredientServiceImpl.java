@@ -111,6 +111,19 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
         return dto;
     }
 
+    @Override
+    public List<RecipeIngredientDTO> findRecipeIngredientsByIngredient(String ingredient) {
+        Ingredient ingredientToFind = ingredientEntityService.getIngredientEntityByName(ingredient);
+        List<RecipeIngredient> recipeIngredients = repo.findRecipeIngredientsByIngredient(ingredientToFind);
+        List<RecipeIngredientDTO> dtos = new ArrayList<>();
+
+        for(RecipeIngredient recipeIngredient : recipeIngredients) {
+            dtos.add(convertToDTO(recipeIngredient));
+        }
+
+        return dtos;
+    }
+
     public List<RecipeIngredientDTO> getIngredientsForRecipe(Long id) {
         List<RecipeIngredientDTO> dtos = new ArrayList<>();
         List<RecipeIngredient> results = repo.findRecipeIngredientsByRecipe_Id(id);

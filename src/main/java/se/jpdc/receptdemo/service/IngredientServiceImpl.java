@@ -80,4 +80,9 @@ public class IngredientServiceImpl extends IngredientEntityService implements In
     protected Ingredient getIngredientEntity(Long id) {
         return repo.getOne(id);
     }
+
+    @Override
+    protected Ingredient getIngredientEntityByName(String name) {
+        return repo.findByNameIgnoreCase(name);
+    }
 }
