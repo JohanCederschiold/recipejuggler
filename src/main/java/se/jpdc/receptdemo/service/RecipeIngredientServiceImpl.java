@@ -70,18 +70,14 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
     @Override
     public CompleteRecipeDTO getCompleteRecipe(Long id) {
 
-        System.out.println(id);
-
         RecipeDTO recipe = recipeService.findRecipyById(id);
-        System.out.println(recipe != null);
         List<RecipeIngredientDTO> ingredients = getIngredientsForRecipe(id);
-        System.out.println(ingredients.size());
         List<IngredientAmountDTO> ingredientAmounts = new ArrayList<>();
 
         for(RecipeIngredientDTO dto : ingredients) {
             Ingredient ingredientNameAndUnit = ingredientEntityService.getIngredientEntity(dto.getIngredientId());
-
-            IngredientAmountDTO ingredientAmountDTO = new IngredientAmountDTO(  ingredientNameAndUnit.getName(),
+            IngredientAmountDTO ingredientAmountDTO = new IngredientAmountDTO(  dto.getId(),
+                                                                                ingredientNameAndUnit.getName(),
                                                                                 ingredientNameAndUnit.getUnit(),
                                                                                 dto.getAmount());
             ingredientAmounts.add(ingredientAmountDTO);
