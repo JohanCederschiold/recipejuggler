@@ -33,4 +33,14 @@ public class StepsController {
         service.deleteStepsRelatedToRecipeByRecipeId(id);
     }
 
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateRecipeSteps(@RequestBody StepsWrapper steps) {
+        System.out.println(steps.getRecipeId());
+        for(StepDTO dtop : steps.getSteps()) {
+            System.out.println(dtop);
+        }
+        service.updateRecipeSteps(steps);
+    }
+
 }

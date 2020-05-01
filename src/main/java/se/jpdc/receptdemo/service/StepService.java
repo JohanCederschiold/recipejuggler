@@ -10,5 +10,6 @@ public interface StepService {
     public List<StepDTO> registerSteps(StepsWrapper steps);
     public List<StepDTO> getStepsToRecipeByRecipeId(Long recipeId);
     public void deleteStepsRelatedToRecipeByRecipeId(Long recipeId);
+    public void updateRecipeSteps(StepsWrapper steps);
 
 }

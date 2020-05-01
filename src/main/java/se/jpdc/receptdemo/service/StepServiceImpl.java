@@ -52,6 +52,46 @@ public class StepServiceImpl implements StepService {
         repo.deleteStepsByRecipeId(recipeId);
     }
 
+    @Override
+    public void updateRecipeSteps(StepsWrapper steps) {
+
+    //    Delete steps that are not found in the new array
+        //Long recipeId = steps.getSteps().get(0).getRecipeid(); //Get recipe id
+        Long recipeId = steps.getRecipeId();
+        List<Step> currentSteps = repo.getStepsByRecipeId(recipeId); //Get current recipesteps
+        for (Step step : currentSteps) { //Iterate over current recipesteps and check if they are in the new list
+            boolean foundStep = false;
+            StepDTO matchingDTO = null;
+            for(StepDTO dto : steps.getSteps()) {
+                if (dto.getId() == step.getId()) {
+                    foundStep = true;
+                    matchingDTO = dto;
+                    break;
+                }
+            }
+            if (!foundStep) {
+                //Step not found - Delete from repo
+                repo.delete(repo.getOne(step.getId()));
+            } else {
+                //Step found - Update step in repo
+                Step stepToUpdate = repo.getOne(step.getId());
+                stepToUpdate.setInstruction(matchingDTO.getInstruction());
+                stepToUpdate.setSequence(matchingDTO.getSequence());
+                repo.save(stepToUpdate);
+            }
+        }
+
+        for(StepDTO dto : steps.getSteps()) {
+            if (dto.getId() == null) {
+                Step newStep = new Step();
+                newStep.setSequence(dto.getSequence());
+                newStep.setInstruction(dto.getInstruction());
+                newStep.setRecipe(recipeEntityService.getRecipyEntity(recipeId));
+                repo.save(newStep);
+            }
+        }
+    }
+
     private StepDTO convertToDto(Step step) {
         StepDTO dto = new StepDTO();
         dto.setId(step.getId());
