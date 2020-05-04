@@ -52,8 +52,8 @@ public class StepServiceImpl implements StepService {
         repo.deleteStepsByRecipeId(recipeId);
     }
 
-    @Override
-    public void updateRecipeSteps(StepsWrapper steps) {
+
+    public void updateRecipeSteps2(StepsWrapper steps) {
 
     //    Delete steps that are not found in the new array
         //Long recipeId = steps.getSteps().get(0).getRecipeid(); //Get recipe id
@@ -66,7 +66,6 @@ public class StepServiceImpl implements StepService {
                 if (dto.getId() == step.getId()) {
                     foundStep = true;
                     matchingDTO = dto;
-                    break;
                 }
             }
             if (!foundStep) {
@@ -92,6 +91,24 @@ public class StepServiceImpl implements StepService {
                 newStep.setRecipe(recipeEntityService.getRecipyEntity(recipeId));
                 repo.save(newStep);
             }
+        }
+    }
+
+    @Override
+    public void updateRecipeSteps (StepsWrapper steps) {
+
+        List<Step> currentSteps = repo.getStepsByRecipeId(steps.getRecipeId());
+        Recipe recipe = recipeEntityService.getRecipyEntity(steps.getRecipeId());
+        for (Step step : currentSteps) {
+            repo.deleteById(step.getId());
+        }
+
+        for(StepDTO newStep : steps.getSteps()) {
+            Step registerStep = new Step();
+            registerStep.setSequence(newStep.getSequence());
+            registerStep.setInstruction(newStep.getInstruction());
+            registerStep.setRecipe(recipe);
+            repo.save(registerStep);
         }
     }
 
