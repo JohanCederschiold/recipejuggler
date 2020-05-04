@@ -71,9 +71,11 @@ public class StepServiceImpl implements StepService {
             }
             if (!foundStep) {
                 //Step not found - Delete from repo
+                System.out.println("Not found: " + step.getInstruction());
                 repo.delete(repo.getOne(step.getId()));
             } else {
                 //Step found - Update step in repo
+                System.out.println("Found: " + step.getInstruction());
                 Step stepToUpdate = repo.getOne(step.getId());
                 stepToUpdate.setInstruction(matchingDTO.getInstruction());
                 stepToUpdate.setSequence(matchingDTO.getSequence());
@@ -83,6 +85,7 @@ public class StepServiceImpl implements StepService {
 
         for(StepDTO dto : steps.getSteps()) {
             if (dto.getId() == null) {
+                System.out.println("New step: " + dto.getInstruction());
                 Step newStep = new Step();
                 newStep.setSequence(dto.getSequence());
                 newStep.setInstruction(dto.getInstruction());
