@@ -34,6 +34,7 @@ public class RecipeServiceImpl extends RecipeEntityService implements RecipeServ
     public RecipeDTO updateRecipe(Recipe recipe) {
         System.out.println(recipe.getId());
         System.out.println(recipe.getOwner());
+        System.out.printf("%s, %s, time: %d, portions: %d", recipe.getTitle(), recipe.getInstructions(), recipe.getPreparationTimeMinutes(), recipe.getNoPortions());
         Recipe originalRecipe = repo.getOne(recipe.getId());
         if (recipe.getOwner() != null) {
             originalRecipe.setOwner(recipe.getOwner());
@@ -42,6 +43,9 @@ public class RecipeServiceImpl extends RecipeEntityService implements RecipeServ
         if (recipe.getTitle() != null) {
             originalRecipe.setTitle(recipe.getTitle());
         }
+
+        originalRecipe.setPreparationTimeMinutes(recipe.getPreparationTimeMinutes());
+        originalRecipe.setNoPortions(recipe.getNoPortions());
 
         repo.save(originalRecipe);
 
